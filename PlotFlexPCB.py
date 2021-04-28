@@ -42,7 +42,7 @@ matplotlib.rcParams.update({'font.size': 12})
 
 Nt=8
 
-rcoil=133.35/2
+rcoil=5*25.4/2#133.35/2
 
 print('min Quad gap is ',rcoil/Nt/2)
 
@@ -92,7 +92,7 @@ fig = plt.figure(figsize=(9,5))
 #### Fix bottom!!!
 plt.subplot(221)
 for i in range(0,len(Coils)):
-    MakeCoils.MakeQuadDXF(Coils[i],rcoil,'QC'+str(i))
+    MakeCoils.MakeQuadDXF(Coils[i],rcoil,'dxf/QC'+str(i))
     plt.plot(rcoil*Coils[i][:,1],Coils[i][:,0],'b-')
     plt.xlim(-20,480)
     plt.ylabel('x (mm)')
@@ -100,7 +100,7 @@ for i in range(0,len(Coils)):
     
 plt.subplot(224)
 for i in range(0,len(Backs)):
-    MakeCoils.MakeQuadDXF(Backs[i],rcoil,'QB'+str(i))
+    MakeCoils.MakeQuadDXF(Backs[i],rcoil,'dxf/QB'+str(i))
     plt.plot(rcoil*Backs[i][:,1],Backs[i][:,0],'r--')
     plt.gca().set_title('excess connections')
     
@@ -108,7 +108,7 @@ for i in range(0,len(Backs)):
 plt.subplot(223)
 for i in range(0,len(Coils)):
     Coils[i][:,1]+=rot
-    MakeCoils.MakeQuadDXF(Coils[i],rcoil,'Q2C'+str(i))
+    MakeCoils.MakeQuadDXF(Coils[i],rcoil,'dxf/Q2C'+str(i))
     plt.plot(rcoil*(Coils[i][:,1]),Coils[i][:,0],'g-')
     plt.xlim(-20,480)
     plt.gca().set_title('$G_{zz}$')
@@ -118,12 +118,12 @@ for i in range(0,len(Coils)):
 plt.subplot(224)
 for i in range(0,len(Backs)):
     Backs[i][:,1]+=rot
-    MakeCoils.MakeQuadDXF(Backs[i],rcoil,'Q2B'+str(i))
+    MakeCoils.MakeQuadDXF(Backs[i],rcoil,'dxf/Q2B'+str(i))
     plt.plot(rcoil*(Backs[i][:,1]),Backs[i][:,0],'r--')
 
 
 Nt=20
-nc=4000
+nc=200
 Nphi=8
 
 wirewidth=3.0
@@ -163,7 +163,7 @@ print('CW Power (W) = ',I**2*Resistance)
 plt.subplot(222)
 for i in range(0,len(Coils)):
     Coils[i][:,1]+=np.pi/2
-    MakeCoils.MakeZCoilDXF(Coils[i],rcoil,'ZC'+str(i))
+    MakeCoils.MakeZCoilDXF(Coils[i],rcoil,'dxf/ZC'+str(i))
     plt.plot(rcoil*(Coils[i][:,1]),Coils[i][:,0],'k-')
     plt.gca().set_title('$G_{zx}$')
     plt.xlim(-20,480)
@@ -171,7 +171,7 @@ for i in range(0,len(Coils)):
 plt.subplot(224)
 for i in range(0,len(Backs)):
     Backs[i][:,1]+=np.pi/2
-    MakeCoils.MakeZCoilDXF(Backs[i],rcoil,'ZB'+str(i))
+    MakeCoils.MakeZCoilDXF(Backs[i],rcoil,'dxf/ZB'+str(i))
     plt.plot(rcoil*(Backs[i][:,1]),Backs[i][:,0],'r--')
     plt.xlim(-20,480)
 

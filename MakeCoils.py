@@ -18,6 +18,8 @@ from ezdxf.addons import r12writer
 
 
 def getIwire(rc,Hm,x_,t_,ww,wg,turn,tlast=np.pi/2):
+    # gets the index you should stop at so you dont hit the previous turn
+    # in both x and theta
     
     Dm=ww+wg
     if turn ==0:
