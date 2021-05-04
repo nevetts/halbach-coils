@@ -72,12 +72,13 @@ vs=np.array(vertices)
 pointlength=np.sum((vs[1:]-vs[:-1])**2,axis=1)**0.5
 wirelength=np.sum(pointlength)
 
-wirewidth=Dmin-0.1
+wirewidth=Dmin-0.2
 rho=1.6e-8 # Ohm mm
-t=0.035e-3 # mm
+t=0.07e-3 # mm
 nsqu=wirelength/wirewidth
 Resistance = rho/t*nsqu
 print('Quad R=',Resistance,' Ohms')
+print('Quad wirewidth (mm)',wirewidth)
 
 Gtarget=0.01
 I=Gtarget/G
@@ -123,11 +124,11 @@ for i in range(0,len(Backs)):
 
 
 Nt=20
-nc=200
+nc=1500
 Nphi=8
 
-wirewidth=3.0
-gap=0.1
+wirewidth=2.9
+gap=0.2
 noff=-0.5
 Hmax=Hcoil/2
 print('theta=0 spacing, wirewidth Zgrad ',Hmax/Nt,1/Nt,wirewidth)
@@ -149,10 +150,11 @@ pointlength=np.sum((vs[1:]-vs[:-1])**2,axis=1)**0.5
 wirelength=np.sum(pointlength)
 
 rho=1.6e-8 # Ohm mm
-t=0.035e-3 # mm
+t=0.070e-3 # mm
 nsqu=wirelength/wirewidth
 Resistance = rho/t*nsqu
 print('Z R=',Resistance,' Ohms')
+print('Axial wirewidth (mm)',wirewidth)
 
 Gtarget=0.01
 I=Gtarget/G
