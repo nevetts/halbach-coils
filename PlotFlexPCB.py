@@ -44,6 +44,8 @@ Nt=8
 
 rcoil=5*25.4/2#133.35/2
 
+drawdir = 'tmp/'
+
 print('min Quad gap is ',rcoil/Nt/2)
 
 Hcoil=226*1.5
@@ -93,7 +95,7 @@ fig = plt.figure(figsize=(9,5))
 #### Fix bottom!!!
 plt.subplot(221)
 for i in range(0,len(Coils)):
-    MakeCoils.MakeQuadDXF(Coils[i],rcoil,'dxf/QC'+str(i))
+    MakeCoils.MakeQuadDXF(Coils[i],rcoil,drawdir+'QC'+str(i))
     plt.plot(rcoil*Coils[i][:,1],Coils[i][:,0],'b-')
     plt.xlim(-20,480)
     plt.ylabel('x (mm)')
@@ -101,7 +103,7 @@ for i in range(0,len(Coils)):
     
 plt.subplot(224)
 for i in range(0,len(Backs)):
-    MakeCoils.MakeQuadDXF(Backs[i],rcoil,'dxf/QB'+str(i))
+    MakeCoils.MakeQuadDXF(Backs[i],rcoil,drawdir+'QB'+str(i))
     plt.plot(rcoil*Backs[i][:,1],Backs[i][:,0],'r--')
     plt.gca().set_title('excess connections')
     
@@ -109,7 +111,7 @@ for i in range(0,len(Backs)):
 plt.subplot(223)
 for i in range(0,len(Coils)):
     Coils[i][:,1]+=rot
-    MakeCoils.MakeQuadDXF(Coils[i],rcoil,'dxf/Q2C'+str(i))
+    MakeCoils.MakeQuadDXF(Coils[i],rcoil,drawdir+'Q2C'+str(i))
     plt.plot(rcoil*(Coils[i][:,1]),Coils[i][:,0],'g-')
     plt.xlim(-20,480)
     plt.gca().set_title('$G_{zz}$')
@@ -119,7 +121,7 @@ for i in range(0,len(Coils)):
 plt.subplot(224)
 for i in range(0,len(Backs)):
     Backs[i][:,1]+=rot
-    MakeCoils.MakeQuadDXF(Backs[i],rcoil,'dxf/Q2B'+str(i))
+    MakeCoils.MakeQuadDXF(Backs[i],rcoil,drawdir+'Q2B'+str(i))
     plt.plot(rcoil*(Backs[i][:,1]),Backs[i][:,0],'r--')
 
 
@@ -166,7 +168,7 @@ plt.subplot(222)
 for i in range(0,len(Coils)):
     Coils[i][:,1]+=np.pi/2
     Coils[i][:,0]=Coils[i][:,0]*-1
-    MakeCoils.MakeZCoilDXF(Coils[i],rcoil,'dxf/ZC'+str(i))
+    MakeCoils.MakeZCoilDXF(Coils[i],rcoil,drawdir+'ZC'+str(i))
     plt.plot(rcoil*(Coils[i][:,1]),Coils[i][:,0],'k-')
     plt.gca().set_title('$G_{zx}$')
     plt.xlim(-20,480)
@@ -175,17 +177,19 @@ plt.subplot(224)
 for i in range(0,len(Backs)):
     Backs[i][:,1]+=np.pi/2
     Backs[i][:,0]=Backs[i][:,0]*-1
-    MakeCoils.MakeZCoilDXF(Backs[i],rcoil,'dxf/ZB'+str(i))
+    MakeCoils.MakeZCoilDXF(Backs[i],rcoil,drawdir+'ZB'+str(i))
     plt.plot(rcoil*(Backs[i][:,1]),Backs[i][:,0],'r--')
     plt.xlim(-20,480)
 
-SilkCoords= [ [0,-Hcoil/2] , [0,Hcoil/2] , [np.pi/2,Hcoil/2] ,[np.pi/2,-Hcoil/2] ,  [3*np.pi/2,-Hcoil/2] ,[3*np.pi/2,Hcoil/2]  ,  [np.pi,Hcoil/2] ,[np.pi,-Hcoil/2]  ]
+SilkCoords= [ [-Hcoil/2,0] , [Hcoil/2,0] , [Hcoil/2,np.pi/2] ,[-Hcoil/2,np.pi/2] ,  [-Hcoil/2,3*np.pi/2] ,[Hcoil/2,3*np.pi/2]  ,  [Hcoil/2,np.pi] ,[-Hcoil/2,np.pi]  ]
 
-MakeCoils.MakeZCoilDXF(SilkCoords,rcoil,'dxf/Silk'+str(i))
+MakeCoils.MakeZCoilDXF(SilkCoords,rcoil,drawdir+'Silk')
 
 
 #plt.ylabel('x (mm)')
 plt.xlabel('circumference (mm)')
 plt.tight_layout()
 plt.show()
-*
+
+
+holeclear = 0.075*2
