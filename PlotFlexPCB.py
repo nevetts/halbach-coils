@@ -165,6 +165,7 @@ print('CW Power (W) = ',I**2*Resistance)
 plt.subplot(222)
 for i in range(0,len(Coils)):
     Coils[i][:,1]+=np.pi/2
+    Coils[i][:,0]=Coils[i][:,0]*-1
     MakeCoils.MakeZCoilDXF(Coils[i],rcoil,'dxf/ZC'+str(i))
     plt.plot(rcoil*(Coils[i][:,1]),Coils[i][:,0],'k-')
     plt.gca().set_title('$G_{zx}$')
@@ -173,13 +174,18 @@ for i in range(0,len(Coils)):
 plt.subplot(224)
 for i in range(0,len(Backs)):
     Backs[i][:,1]+=np.pi/2
+    Backs[i][:,0]=Backs[i][:,0]*-1
     MakeCoils.MakeZCoilDXF(Backs[i],rcoil,'dxf/ZB'+str(i))
     plt.plot(rcoil*(Backs[i][:,1]),Backs[i][:,0],'r--')
     plt.xlim(-20,480)
 
+SilkCoords= [ [0,-Hcoil/2] , [0,Hcoil/2] , [np.pi/2,Hcoil/2] ,[np.pi/2,-Hcoil/2] ,  [3*np.pi/2,-Hcoil/2] ,[3*np.pi/2,Hcoil/2]  ,  [np.pi,Hcoil/2] ,[np.pi,-Hcoil/2]  ]
+
+MakeCoils.MakeZCoilDXF(SilkCoords,rcoil,'dxf/Silk'+str(i))
 
 
 #plt.ylabel('x (mm)')
 plt.xlabel('circumference (mm)')
 plt.tight_layout()
 plt.show()
+*
