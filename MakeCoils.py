@@ -17,6 +17,12 @@ from ezdxf import units
 from ezdxf.addons import r12writer
 
 
+def FlipVertical(coords):
+    coords[:,0]=-1*coords[:,0]
+    
+    return coords
+
+
 def getIwire(rc,Hm,x_,t_,ww,wg,turn,tlast=np.pi/2):
     # gets the index you should stop at so you dont hit the previous turn
     # in both x and theta
@@ -381,6 +387,20 @@ def getZGradCol(rcoil,Hmax,Nt,wirewidth,gap,nc=1500,Nphi=8,noff=-0.5):
     flatcoords=np.array(flatcoords)
     Backside=[B1,B2,B3,B4]
     Coils=[Q1,Q2,Q3,Q4]
+    
+#    if flip == True:
+#        for q in range(0,len(Coils)):
+#            print(Coils[q].shape)
+#            Coils[q]=FlipVertical(Coils[q])
+#        for q in range(0,len(Backside)):
+#            Backside[q]=FlipVertical(Backside[q])
+#        
+#        for q in range(0,len(flatcoords)):
+#            flatcoords[q]=FlipVertical(flatcoords[q])
+#            
+#        for q in range(0,len(vertices)):
+#            vertices[q][2]=-1*vertices[q][2]
+    
     cd = source.current.Line(curr=1,vertices=vertices)
     # create collection
     c = Collection(cd)

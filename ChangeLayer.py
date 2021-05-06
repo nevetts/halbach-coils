@@ -11,10 +11,11 @@ import os
 import sys
 
 
-path ='/home/abqmr/.local/share/kicad/5.99/footprints/HalbachGrads.pretty/'
-footprint='HalbachApril26-2021.kicad_mod'
+path ='/home/nathan/.local/share/kicad/5.99/footprints/HalbachGradCoils.pretty/'
+footprint='4LayerGradCoils.kicad_mod'
 
 filein=path+footprint
+print(os.listdir(path))
 
 f = open(filein,'r')
 filedata = f.read()
